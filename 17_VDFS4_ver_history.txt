@@ -1,0 +1,174 @@
+	ChangeLog file for VDFS4 file system driver and tools for kernel 4.1
+
+driver latest version: 0010.0048
+tools latest version:  0005.0043
+
+2016-07-19 Igor Gorniak <i.gorniak@samsung.com>
+tag: vdfs4.0010.0048-2016_07_19
+	driver version: 0010.0048
+	tools  version: 0005.0043
+	
+	RELEASE NOTES
+	=============
+	* vdfs-driver - When tuned file compressed contents (chunks+meta data)
+					is less than 16kB then this file is forced to SW readpage path.
+	* vdfs-driver - vdfs4_chunk_page_count(): Added function that calculates chunk
+					size after decompression.
+
+
+2016-06-17 Piotr Konczak <p.konczak@samsung.com>
+tag: vdfs4.0009.0048-2016_06_17
+	driver version: 0009.0048
+	tools  version: 0005.0043
+	
+	RELEASE NOTES
+	=============
+	* vdfs-driver - fix for SVACE issues: 43499, 117008, 126110, 126454
+
+2016-05-23 Marek Rybczynski <m.rybczynski@samsung.com>
+tag: vdfs4.0007.0048-2016_05_23
+	driver version: 0007.0048
+	tools  version: 0005.0043
+	
+	RELEASE NOTES
+	=============
+	* vdfs-driver - Add REQ_META & REQ_PRIO flags to block IO metadata 
+		operations.
+
+2016-05-23 Igor Gorniak <i.gorniak@samsung.com>
+tag: vdfs4.0006.0048-2016_05_23
+	driver version: 0006.0048
+	tools  version: 0005.0043
+	
+	RELEASE NOTES
+	=============
+	* vdfs-driver - Fixed compile errors with and without decryption enabled
+					on platforms that doesn't have HW2 decompressor API
+
+2016-05-20 Igor Gorniak <i.gorniak@samsung.com>
+tag: vdfs4.0005.0048-2016_05_20
+	driver version: 0005.0048
+	tools  version: 0005.0043
+	
+	RELEASE NOTES
+	=============
+	* vdfs-tools - 	Fixed bug in compress_chunk_thread() where if uncompressed
+					chunk size was already aligned then incorrect padding was 
+					added to chunk buffer.
+
+2016-05-20 Igor Gorniak <i.gorniak@samsung.com>
+tag: vdfs4.0005.0048-2016_05_20
+	driver version: 0005.0048
+	tools  version: 0005.0043
+	
+	RELEASE NOTES
+	=============
+	* vdfs-tools - 	Fixed bug in compress_chunk_thread() where if uncompressed
+					chunk size was already aligned then incorrect padding was 
+					added to chunk buffer.
+
+2016-05-16 Igor Gorniak <i.gorniak@samsung.com>
+tag: vdfs4.0005.0048-2016_05_16
+	driver version: 0005.0048
+	tools  version: 0004.0043
+	
+	RELEASE NOTES
+	=============
+	* vdfs-driver -	Added AES decryption support.
+	* vdfs-driver -	Support for software decryption via CryptoAPI in SW path
+					for tuned files
+	* vdfs-driver -	Support for hardware decryption via HW2 API in HW2 path
+					for tuned files
+	* vdfs-driver -	New layout field: vdfs4_super_block.encryption_flags
+					For keeping info about encryption used on partition
+	* vdfs-driver -	New layout field: vdfs4_comp_file_descr.encryption_flags
+					For keeping random AES nonce.		
+
+2016-05-16 Igor Gorniak <i.gorniak@samsung.com>
+tag: vdfs4.0004.0043-2016_05_16
+	driver version: 0004.0048
+	tools  version: 0004.0043
+	
+	RELEASE NOTES
+	=============
+	* vdfs-tools -	Added AES encryption support.
+	* vdfs-tools -	New layout field: vdfs4_super_block.encryption_flags
+					For keeping info about encryption used on partition
+	* vdfs-tools -	New layout field: vdfs4_comp_file_descr.encryption_flags
+					For keeping random AES nonce.			
+	* vdfs-tools - 	New cmdline parameter -E for passing 16 bytes of AES
+					encryption key for encrypting file data.
+	* vdfs-tools - 	New cmdline parameter --encrypt-elf for enabling encryption
+					of compressed ELF files.
+	* vdfs-tools - 	New cmdline parameter --encrypt-all for enabling encryption
+					of compressed files.
+	* vdfs-tools - 	New cmdline parameter --force-compr-encrypted for forcing
+					for all encrypted data will also be compressed hence leaving
+					no uncompressed chunks.
+	* vdfs-tools - 	Changed compress_chunk() for compression ratio >100 support
+					and cleaner code.
+	* vdfs-tools -	Changed compressor[] compression API for compression ratio >100
+					support.
+	* vdfs-tools -	Changed __compress_zlib_gzip_chunk() for compression ratio >100
+					support.
+	* vdfs-tools -	Changed compress_file() to implement --force-compr-encrypted.
+					When some chunk has not been compressed then compression retry
+					is done with smaller chunk size.
+	* vdfs-tools -	Changed compress_file() to add proper zero padding when writing
+					compressed chunks and chunk_size+chunk_offset would exceed maximum
+					allowed chunk size (due to  HW limitation).
+			
+
+2016-05-04 Igor Gorniak <i.gorniak@samsung.com>
+tag: vdfs4.0004.0048-2016_05_04
+	driver version: 0004.0048
+	tools  version: 0043
+	
+	RELEASE NOTES
+	=============
+	* vdfs-driver - Before creating new symlink inode a space is reserved for
+					symlink data in vdfs4_symlink()
+	* vdfs-driver - vdfs4_get_block_prep_da() is modified to not reserve any 
+					more space for symlinks if it is already reserved.
+
+2016-05-04 Igor Gorniak <i.gorniak@samsung.com>
+tag: vdfs4.0003.0048-2016_05_04
+	driver version: 0003.0048
+	tools  version: 0043
+	
+	RELEASE NOTES
+	=============
+	* vdfs-driver - New function free_blocks_in_bitmap_contig_check()
+					is added for counting number of free blocks in
+					meta area bitmap and checking if there is enough
+					contiguous blocks available for new meta object.
+	* vdfs-driver - free_blocks_in_bitmap_contig_check() is called from
+					expand_special_file()
+
+
+2016-04-07 Igor Gorniak <i.gorniak@samsung.com>
+tag: vdfs4.0003.0047-2016_04_07
+	driver version: 0003.0047
+	tools  version: 0043
+	
+	RELEASE NOTES
+	=============
+	* vdfs-driver - dlink removal
+
+2016-04-05 Dominik Malinski <d.malinski@samsung.com>
+tag: vdfs4.0002.0047-2016_04_05
+        driver version: 0002.0047
+        tools  version: 0043
+
+        RELEASE NOTES
+        =============   
+        * vdfs-driver - HW1, s_files, fragmentation removal
+
+2016-04-01 Dominik Malinski <d.malinski@samsung.com>
+tag: vdfs4.0001.0047-2016_04_01
+        driver version: 0001.0047
+        tools  version: 0043
+
+        RELEASE NOTES
+        =============   
+        * vdfs-driver - increase meta re-read
