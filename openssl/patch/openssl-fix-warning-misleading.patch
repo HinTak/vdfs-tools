@@ -1,0 +1,18 @@
+diff -urN a/crypto/pem/pem_lib.c b/crypto/pem/pem_lib.c
+--- a/crypto/pem/pem_lib.c	2014-03-18 01:14:20.000000000 +0900
++++ b/crypto/pem/pem_lib.c	2017-06-08 10:44:58.000000000 +0900
+@@ -499,8 +499,12 @@
+ 	if (strncmp(header,"Proc-Type: ",11) != 0)
+ 		{ PEMerr(PEM_F_PEM_GET_EVP_CIPHER_INFO,PEM_R_NOT_PROC_TYPE); return(0); }
+ 	header+=11;
+-	if (*header != '4') return(0); header++;
+-	if (*header != ',') return(0); header++;
++	if (*header != '4')
++		{ return(0); }
++	header++;
++	if (*header != ',')
++		{ return(0); }
++	header++;
+ 	if (strncmp(header,"ENCRYPTED",9) != 0)
+ 		{ PEMerr(PEM_F_PEM_GET_EVP_CIPHER_INFO,PEM_R_NOT_ENCRYPTED); return(0); }
+ 	for (; (*header != '\n') && (*header != '\0'); header++)
